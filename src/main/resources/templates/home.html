@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .home-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .logout-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+
+<div class="home-container">
+    <h1>Welcome to the Home Page</h1>
+
+    <div th:if="${#authentication != null}">
+        <p>Hello, <span th:text="${#authentication.name}">User</span>!</p>
+        <form action="/logout" method="post">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
+
+    <div th:if="${#authentication == null}">
+        <p>You are not logged in.</p>
+        <a href="/login">Login here</a>
+    </div>
+</div>
+
+</body>
+</html>
